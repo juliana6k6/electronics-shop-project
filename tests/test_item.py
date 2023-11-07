@@ -19,7 +19,9 @@ def test_apply_discount():
     item2.apply_discount()
     assert item2.price == 5000
 
+
 item = Item('Телефон', 10000, 5)
+
 
 def test_name1():
     # длина наименования товара меньше 10 символов
@@ -35,6 +37,22 @@ def test_instantiate_from_csv():
     Item.all = []
     Item.instantiate_from_csv('../src/items.csv')  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
+
+
 @pytest.mark.parametrize('num', ['5', '5.0', '5.5'])
 def test_string_to_number(num):
     assert Item.string_to_number(num) == 5
+
+
+def test_repr():
+    item3 = Item("Телевизор", 10000, 2)
+    item4 = Item("Ноутбук", 20000, 5)
+    assert repr(item3) == "Item('Телевизор', 10000, 2)"
+    assert repr(item4) == "Item('Ноутбук', 20000, 5)"
+
+
+def test_str():
+    item5 = Item("Смартфон", 10000, 50)
+    item6 = Item("Ноутбук", 20000, 15)
+    assert str(item5) == "Смартфон"
+    assert str(item6) == "Ноутбук"
