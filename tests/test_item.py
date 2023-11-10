@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
-
+from src.phone import Phone
 
 item1 = Item("Смартфон", 1000, 20)
 item2 = Item("Планшет", 10000, 2)
@@ -62,3 +62,26 @@ def test_str():
     item6 = Item("Ноутбук", 20000, 15)
     assert str(item5) == "Смартфон"
     assert str(item6) == "Ноутбук"
+
+
+phone1 = Phone("iPhone 14", 120_000, 5, 2)
+
+
+def test_phone_str():
+    assert str(phone1) == 'iPhone 14'
+
+
+def test_phone_repr():
+    assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
+
+
+def test_number_of_sim():
+    assert phone1.number_of_sim == 2
+
+
+def test_phone_add():
+    assert item1 + phone1 == 25
+
+
+def test_item_add():
+    assert phone1 + phone1 == 10
