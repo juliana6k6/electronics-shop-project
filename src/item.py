@@ -28,16 +28,29 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
+    def __add__(self, other):
+        """
+        Рeализует возможность сложения экземпляров класса `Phone` и `Item` по количеству товара в магазине,
+        при этом нельзя складывать `Phone` или `Item` с экземплярами не `Phone` или `Item` классов
+        """
+        if isinstance(other, Item):
+            return int(self.quantity) + int(other.quantity)
+        else:
+            raise TypeError("Нельзя сложить классы 'Item' и чем-то другим.")
 
     @property
     def name(self):
-        """Возвращает полное наименование товара"""
+        """
+        Возвращает полное наименование товара
+        """
         return self.__name
 
     @name.setter
     def name(self, product_name):
-        """Если длина наименования товара больше 10 символов, сокращает наименование до 10 символов,
-        если нет - оставляет таким же"""
+        """
+        Если длина наименования товара больше 10 символов, сокращает наименование до 10 символов,
+        если нет - оставляет таким же
+        """
         self.__name = product_name[:10]
     def calculate_total_price(self) -> float:
         """
