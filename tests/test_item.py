@@ -3,27 +3,33 @@ import pytest
 from src.item import Item
 from src.phone import Phone
 
-item1 = Item("Смартфон", 1000, 20)
-item2 = Item("Планшет", 10000, 2)
+@pytest.fixture
+def item1():
+    return Item("Смартфон", 1000, 20)
+
+@pytest.fixture
+def item2():
+    return Item("Планшет", 10000, 2)
 
 
-def test_calculate_total_price():
+def test_calculate_total_price(item1, item2):
     assert item1.calculate_total_price() == 20000
     assert item2.calculate_total_price() == 20000
 
 
-def test_apply_discount():
+def test_apply_discount(item1, item2):
     Item.pay_rate = 0.5
     item1.apply_discount()
     assert item1.price == 500
     item2.apply_discount()
     assert item2.price == 5000
 
+@pytest.fixture
+def item3():
+    return Item('Телефон', 10000, 5)
 
-item = Item('Телефон', 10000, 5)
 
-
-def test_name1():
+def test_name1(item3):
     """
     Длина наименования товара меньше 10 символов
     """
@@ -31,7 +37,7 @@ def test_name1():
     assert item.name == 'Смартфон'
 
 
-def test_name2():
+def test_name2(item3):
     """
     Длина наименования товара больше 10 символов
     """
