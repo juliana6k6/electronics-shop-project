@@ -34,7 +34,7 @@ class Item:
         при этом нельзя складывать `Phone` или `Item` с экземплярами не `Phone` или `Item` классов
         """
         if isinstance(other, Item):
-            return int(self.quantity) + int(other.quantity)
+            return self.quantity + other.quantity
         else:
             raise TypeError("Нельзя сложить классы 'Item' и чем-то другим.")
 
