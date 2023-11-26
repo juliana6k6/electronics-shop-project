@@ -1,5 +1,4 @@
 from src.keyboard import Keyboard
-import pytest
 
 kb = Keyboard('Dark Project KD87A', 9600, 5)
 
