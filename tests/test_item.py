@@ -24,6 +24,7 @@ def test_apply_discount(item1, item2):
     item2.apply_discount()
     assert item2.price == 5000
 
+
 @pytest.fixture
 def item3():
     return Item('Телефон', 10000, 5)
@@ -33,16 +34,16 @@ def test_name1(item3):
     """
     Длина наименования товара меньше 10 символов
     """
-    item.name = 'Смартфон'
-    assert item.name == 'Смартфон'
+    item3.name = 'Смартфон'
+    assert item3.name == 'Смартфон'
 
 
 def test_name2(item3):
     """
     Длина наименования товара больше 10 символов
     """
-    item.name = "СуперСмартфон"
-    assert item.name == "СуперСмарт"
+    item3.name = "СуперСмартфон"
+    assert item3.name == "СуперСмарт"
 
 
 def test_instantiate_from_csv():

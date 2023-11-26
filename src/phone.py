@@ -49,4 +49,4 @@ class Phone(Item):
         """
         if not isinstance(other, Phone):
             raise ValueError('Складывать можно только объекты Item и дочерние от них.')
-        return int(self.quantity) + int(other.quantity)
+        return self.quantity + other.quantity
