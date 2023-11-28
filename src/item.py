@@ -1,6 +1,9 @@
 import csv
 import os
 
+class InstantiateCSVError(Exception):
+    pass
+
 
 class Item:
     """
@@ -72,18 +75,25 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         return int(float(number))
+
     @classmethod
     def instantiate_from_csv(cls, file_name):
         """
         инициализирует экземпляры класса Item данными из файла src/items.csv
         """
-        with open(file_name, encoding="utf-8") as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                name = row['name']
-                price = row['price']
-                quantity = row['quantity']
-                cls(name, price, quantity)
+        try:
+            with open(file_name, encoding="utf-8") as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if len(row) != 3:
+                        raise InstantiateCSVError(f'Файл item.csv поврежден')
+                    name = row['name']
+                    price = row['price']
+                    quantity = row['quantity']
+                    cls(name, price, quantity)
+        except FileNotFoundError:
+            raise FileNotFoundError(f'Отсутствует файл items.csv')
+
 
 
 
